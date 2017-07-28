@@ -1,0 +1,29 @@
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Repository.RestaurantMapper">
+
+    <resultMap id="RestaurantMap" type="Restaurant">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="getRestaurant" parameterType="int" resultMap="RestaurantMap">
+        SELECT id, name FROM restaurant WHERE id = #{restId}
+    </select>
+
+    <select id="getAllRestaurants" resultMap="RestaurantMap">
+        SELECT * FROM restaurant
+    </select>
+
+    <delete id="deleteRestaurantById" parameterType="int">
+        DELETE FROM restaurant WHERE id = #{restId}
+    </delete>
+
+    <update id="updateRestaurant" parameterType="Restaurant">
+        UPDATE restaurant SET name = #{name} WHERE id = #{id}
+    </update>
+
+    <insert id="addRestaurant">
+        INSERT INTO restaurant (name) VALUES (#{name})
+    </insert>
+</mapper>
